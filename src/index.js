@@ -19,7 +19,15 @@ function displayList(project){
     });
 }
 
+function retrieveProjects(){
+    fetch("./test.json").then(response => {
+        return response.json();
+    });
+}
+
 displayList(newProject);
+
+console.log(retrieveProjects());
 
 addBtn.addEventListener("click", () => {
     newProject.addToList(document.querySelector("#task-input").value);

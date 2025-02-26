@@ -1,0 +1,19 @@
+{
+    "projects": [
+        {
+            "name": "My Project",
+            "tasks": [
+                "task1",
+                "task2"
+            ]
+        },
+        {
+            "name": "My other project",
+            "tasks": [
+                "taskother1",
+                "taskother2",
+                "taskother3"
+            ]
+        }
+    ]
+}
