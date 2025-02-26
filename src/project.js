@@ -10,6 +10,14 @@ class Project {
         this.items++;
     }
 
+    removeFromList(task){
+        if(this.todoList.find((element) => element == task)){
+            this.todoList[this.todoList.findIndex((element) => element == task)] = null;
+            //remove all null elements from the array
+            this.todoList = this.todoList.filter((element) => element != null);
+        }
+    }
+
     getList(){
         return this.todoList;
     }
