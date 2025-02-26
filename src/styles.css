@@ -3,6 +3,17 @@
     padding: 0;
 }
 
-h1 {
-    color: red;
+#container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+}
+
+#sidebar {
+    background-color: rgb(69, 168, 173);
+}
+
+#content {
+    padding: 20px;
 }
