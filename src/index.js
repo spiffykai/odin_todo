@@ -14,7 +14,7 @@ const dialogProjectName = newProjectDialog.querySelector("#newproject-name");
 const cancelNewProjectBtn = newProjectDialog.querySelector("#cancelnewproject-btn");
 
 let projects = [];
-let currentProject;
+let currentProject = null;
 
 function saveList(){
     localStorage.setItem("projects", JSON.stringify(projects));
@@ -26,7 +26,6 @@ function loadList(){
     
     savedProjects.forEach(element => {
         let savedProject = new Project(element.name);
-        console.log(savedProject.name);
         element.todoList.forEach(element => {
             savedProject.addToList(element);
         });
