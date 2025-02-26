@@ -1,5 +1,4 @@
 import "./styles.css";
-import testJson from "./test.json";
 import { Project } from "./project.js";
 
 const contentDiv = document.querySelector("#content");
@@ -22,39 +21,48 @@ function displayList(project){
     });
 }
 
-console.log(testJson.projects);
+function saveList(){
+    localStorage.setItem("projects", JSON.stringify(projects));
+}
 
-testJson.projects.forEach(element => {
-    console.log(element.name);
-    let testProject = new Project(element.name);
-    element.tasks.forEach(element => {
-        testProject.addToList(element);
+function loadList(){
+    let savedProjectsString = localStorage.getItem("projects");
+    let savedProjects = JSON.parse(savedProjectsString);
+    
+    savedProjects.forEach(element => {
+        let savedProject = new Project(element.name);
+        console.log(savedProject.name);
+        element.todoList.forEach(element => {
+            savedProject.addToList(element);
+        });
+        projects.push(savedProject);
     });
 
-    projects.push(testProject);
-});
-
-projects.forEach(element => {
-    const projectItem = document.createElement("li");
-    const projectButton = document.createElement("button");
-    projectButton.innerHTML = element.name;
-
-    projectButton.addEventListener("click", () => {
-        displayList(element);
-        currentProject = element;
+    projects.forEach(element => {
+        const projectItem = document.createElement("li");
+        const projectButton = document.createElement("button");
+        projectButton.innerHTML = element.name;
+    
+        projectButton.addEventListener("click", () => {
+            displayList(element);
+            currentProject = element;
+        });
+    
+        projectItem.appendChild(projectButton);
+        projectList.appendChild(projectItem);
     });
 
-    projectItem.appendChild(projectButton);
-    projectList.appendChild(projectItem);
-});
-
-displayList(projects[0]);
-
-if(projects.length > 0)
-    currentProject = projects[0];
+    if(projects.length > 0)
+        currentProject = projects[0];
+        displayList(currentProject);
+    
+}
 
 addBtn.addEventListener("click", () => {
     currentProject.addToList(document.querySelector("#task-input").value);
     displayList(currentProject);
     document.querySelector("#task-input").value = "";
+    saveList();
 });
+
+loadList();
