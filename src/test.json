@@ -4,7 +4,8 @@
             "name": "My Project",
             "tasks": [
                 "task1",
-                "task2"
+                "task2",
+                "task3"
             ]
         },
         {
@@ -12,7 +13,8 @@
             "tasks": [
                 "taskother1",
                 "taskother2",
-                "taskother3"
+                "taskother3",
+                "this is a big test"
             ]
         }
     ]
