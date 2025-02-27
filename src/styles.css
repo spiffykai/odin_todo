@@ -83,19 +83,52 @@
 
 #project-list li button:first-child:hover {
     background-color: rgba(255, 255, 255, 0.438);
+    transform: translateX(10px);
 }
 
 #header {
     background-color: var(--header-color);
     color: var(--header-text-color);
     box-shadow: 0px 4px 4px #b6b6b6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 15px;
+}
+
+#header button span{
+    color: black;
+}
+
+#header button:hover {
+    border: 2px solid black;
 }
 
 #content {
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
 }
 
-#newproject-dialog {
+#content ul li div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 40px;
+}
+
+#content ul li div button:hover {
+    border: 2px black solid;
+}
+
+#content ul li div button span {
+    color: black;
+}
+
+
+#newproject-dialog, #newtask-dialog {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -105,7 +138,7 @@
     border-radius: 8px;
 }
 
-#newproject-dialog form {
+#newproject-dialog form, #newtask-dialog form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -113,12 +146,12 @@
     width: 600px;
 }
 
-#newproject-dialog form h1 {
+#newproject-dialog form h1, #newtask-dialog form h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin-bottom: 24px;
 }
 
-#newproject-dialog form input {
+#newproject-dialog form input, #newtask-dialog form input {
     background-color: var(--header-color);
     outline: 0;
     border: 0;
@@ -129,14 +162,14 @@
     font-size: 16px;
 }
 
-#newproject-buttons {
+#newproject-buttons, #newtask-buttons {
     margin-top: 24px;
     display: flex;
     align-items: end;
     gap: 20px;
 }
 
-#newproject-buttons button {
+#newproject-buttons button, #newtask-buttons button {
     border: 0;
     outline: 0;
     border-radius: 8px;
@@ -145,18 +178,18 @@
     transition-duration: 0.1s;
 }
 
-#newproject-buttons button:first-child {
+#newproject-buttons button:first-child, #newtask-buttons button:first-child {
     height: 40px;
     background-color: var(--sidebar-color);
     font-size: 20px;
 }
 
-#newproject-buttons button:last-child {
+#newproject-buttons button:last-child, #newtask-buttons button:last-child {
     height: 30px;
     background-color: rgb(143, 78, 78);
     font-size: 16px;
 }
 
-#newproject-buttons button:hover {
+#newproject-buttons button:hover, #newtask-buttons button:hover {
     filter: brightness(125%);
 }

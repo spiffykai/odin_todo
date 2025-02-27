@@ -5,13 +5,19 @@ const contentDiv = document.querySelector("#content");
 const list = document.querySelector("#todo-list");
 const projectList = document.querySelector("#project-list");
 const displayedProjectName = document.querySelector("#projectname");
-const addTaskSection = document.querySelector("#addtask-section");
-const addBtn = document.querySelector("#add-btn");
+const addTaskBtn = document.querySelector("#newtask-btn");
+
 const createProjectBtn = document.querySelector("#createproject-btn");
 const newProjectDialog = document.querySelector("#newproject-dialog");
 const newProjectForm = newProjectDialog.querySelector("#newproject-form");
 const dialogProjectName = newProjectDialog.querySelector("#newproject-name");
 const cancelNewProjectBtn = newProjectDialog.querySelector("#cancelnewproject-btn");
+
+const newTaskBtn = document.querySelector("#newtask-btn");
+const newTaskDialog = document.querySelector("#newtask-dialog")
+const newTaskForm = newTaskDialog.querySelector("#newtask-form");
+const newTaskName = newTaskDialog.querySelector("#newtask-name");
+const cancelNewTaskBtn = newTaskDialog.querySelector("#cancelnewtask-btn");
 
 let projects = [];
 let currentProject = null;
@@ -96,38 +102,41 @@ function displayList(project){
 
     if(project == null){
         displayedProjectName.innerHTML = "Create a project to get started";
-        addTaskSection.hidden = true;
+        addTaskBtn.hidden = true;
+        addTaskBtn.style.display = "none";
         return;
     }
 
     displayedProjectName.innerHTML = project.name;
-    addTaskSection.hidden = false;
+    addTaskBtn.hidden = false;
+    addTaskBtn.style.display = "block";
 
     let todoList = project.getList();
 
     todoList.forEach(element => {
         const todoItem = document.createElement("li");
-        todoItem.innerHTML = element;
+
+        const todoItemDiv = document.createElement("div");
+        todoItemDiv.innerHTML = element;
 
         const removeButton = document.createElement("button");
-        removeButton.innerHTML = "remove";
+        removeButton.className = "sidebar-btn";
         removeButton.addEventListener("click", () => {
             project.removeFromList(element);
             displayList(project);
             saveList();
         });
-        todoItem.appendChild(removeButton);
+
+        const removeIcon = document.createElement("span");
+        removeIcon.innerHTML = "remove";
+        removeIcon.className = "material-symbols-outlined"
+        removeButton.appendChild(removeIcon);
+        todoItemDiv.appendChild(removeButton);
+        todoItem.appendChild(todoItemDiv);
 
         list.appendChild(todoItem);
     });
 }
-
-addBtn.addEventListener("click", () => {
-    currentProject.addToList(document.querySelector("#task-input").value);
-    displayList(currentProject);
-    document.querySelector("#task-input").value = "";
-    saveList();
-});
 
 createProjectBtn.addEventListener("click", () => {
     newProjectDialog.showModal();
@@ -153,6 +162,25 @@ newProjectForm.addEventListener("submit", (e) => {
     saveList();
     dialogProjectName.value = "";
     newProjectDialog.close();
+});
+
+newTaskBtn.addEventListener("click", () => {
+    newTaskDialog.showModal();
+});
+
+cancelNewTaskBtn.addEventListener("click", () => {
+    newTaskName.value = "";
+    newTaskDialog.close();
+});
+
+newTaskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    currentProject.addToList(newTaskName.value);
+    displayList(currentProject);
+    saveList();
+    newTaskName.value = "";
+    newTaskDialog.close();
 });
 
 loadList();

@@ -18,27 +18,33 @@
             </ul>
         </div>
         <div id="header">
-
+            <h1 id="projectname">todo list</h1>
+            <button id="newtask-btn" class="sidebar-btn"><span class="material-symbols-outlined">add</span></button>
         </div>
         <div id="content">
-            <h1 id="projectname">todo list</h1>
             <ul id="todo-list">
             </ul>
-
-            <div id="addtask-section">
-                <input type="text" id="task-input" name="task-input">
-                <button id="add-btn">Add Task</button>
-            </div>
         </div>
     </div>
 
     <dialog id="newproject-dialog">
         <form id="newproject-form">
             <h1>Create a project.</h1>
-            <input type="text" id="newproject-name" name="newproject-name">
+            <input type="text" id="newproject-name" name="newproject-name" required>
             <div id="newproject-buttons">
                 <button type="submit" id="addnewproject-btn">Add</button>
                 <button type="button" id="cancelnewproject-btn">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="newtask-dialog">
+        <form id="newtask-form">
+            <h1>Add a task.</h1>
+            <input type="text" id="newtask-name" name="newtask-name" required>
+            <div id="newtask-buttons">
+                <button type="submit" id="addnewtask-btn">Add</button>
+                <button type="button" id="cancelnewtask-btn">Cancel</button>
             </div>
         </form>
     </dialog>
