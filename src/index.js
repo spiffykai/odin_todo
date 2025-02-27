@@ -56,10 +56,16 @@ function createProjectsList(){
         projectItem.appendChild(projectButton);
 
         const removeProjectButton = document.createElement("button");
-        removeProjectButton.innerHTML = "remove";
         removeProjectButton.addEventListener("click", () => {
             removeProject(element);
         });
+        removeProjectButton.className = "sidebar-btn";
+
+        const removeProjectIcon = document.createElement("span");
+        removeProjectIcon.innerHTML = "remove";
+        removeProjectIcon.className = "material-symbols-outlined";
+        removeProjectButton.appendChild(removeProjectIcon);
+
         projectItem.appendChild(removeProjectButton);
 
         projectList.appendChild(projectItem);
