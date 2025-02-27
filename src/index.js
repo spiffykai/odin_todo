@@ -28,6 +28,10 @@ function saveList(){
 
 function loadList(){
     let savedProjectsString = localStorage.getItem("projects");
+    if(localStorage.getItem("projects") === null || savedProjectsString == ""){
+        displayList(currentProject);
+        return;
+    }
     let savedProjects = JSON.parse(savedProjectsString);
     
     savedProjects.forEach(element => {
