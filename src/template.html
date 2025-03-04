@@ -42,6 +42,13 @@
         <form id="newtask-form">
             <h1>Add a task.</h1>
             <input type="text" id="newtask-name" name="newtask-name" required>
+            <input type="text" id="newtask-description" name="newtask-description" required>
+            <input type="radio" id="low" name="priority" value="0" checked>
+            <label for="low">Low</label>
+            <input type="radio" id="medium" name="priority" value="1">
+            <label for="medium">Mediun</label>
+            <input type="radio" id="high" name="priority" value="2">
+            <label for="high">High</label>
             <div id="newtask-buttons">
                 <button type="submit" id="addnewtask-btn">Add</button>
                 <button type="button" id="cancelnewtask-btn">Cancel</button>

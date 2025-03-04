@@ -1,5 +1,6 @@
 import "./styles.css";
 import { Project } from "./project.js";
+import { Task } from "./task.js";
 
 const list = document.querySelector("#todo-list");
 const projectList = document.querySelector("#project-list");
@@ -18,6 +19,7 @@ const newTaskBtn = document.querySelector("#newtask-btn");
 const newTaskDialog = document.querySelector("#newtask-dialog");
 const newTaskForm = newTaskDialog.querySelector("#newtask-form");
 const newTaskName = newTaskDialog.querySelector("#newtask-name");
+const newTaskDescription = newTaskDialog.querySelector("#newtask-description");
 const cancelNewTaskBtn = newTaskDialog.querySelector("#cancelnewtask-btn");
 
 let projects = [];
@@ -103,7 +105,7 @@ function removeProject(projectToRemove) {
 	saveList();
 }
 
-//creates the todo list for the project
+//creates and displays the todo list for the current project
 function displayList(project) {
 	list.innerHTML = "";
 
@@ -124,7 +126,7 @@ function displayList(project) {
 		const todoItem = document.createElement("li");
 
 		const todoItemDiv = document.createElement("div");
-		todoItemDiv.innerHTML = element;
+		todoItemDiv.innerHTML = element.name;
 
 		const removeButton = document.createElement("button");
 		removeButton.className = "sidebar-btn";
@@ -144,6 +146,8 @@ function displayList(project) {
 		list.appendChild(todoItem);
 	});
 }
+
+//NEW PROJECT DIALOG
 
 createProjectBtn.addEventListener("click", () => {
 	newProjectDialog.showModal();
@@ -171,22 +175,37 @@ newProjectForm.addEventListener("submit", (e) => {
 	newProjectDialog.close();
 });
 
+//NEW TASK DIALOG
+
 newTaskBtn.addEventListener("click", () => {
 	newTaskDialog.showModal();
 });
 
 cancelNewTaskBtn.addEventListener("click", () => {
 	newTaskName.value = "";
+	newTaskDescription.value = "";
 	newTaskDialog.close();
 });
 
 newTaskForm.addEventListener("submit", (e) => {
 	e.preventDefault();
+	let priority = 0;
 
-	currentProject.addToList(newTaskName.value);
+	if(newTaskDialog.querySelector("#low").checked){
+		priority = 0;
+	} else if(newTaskDialog.querySelector("#medium").checked){
+		priority = 1;
+	} else if(newTaskDialog.querySelector("#high").checked){
+		priority = 2;
+	}
+
+	let newTask = new Task(newTaskName.value, newTaskDescription.value, priority);
+	console.log(newTask);
+	currentProject.addToList(newTask);
 	displayList(currentProject);
 	saveList();
 	newTaskName.value = "";
+	newTaskDescription.value = "";
 	newTaskDialog.close();
 });
 
